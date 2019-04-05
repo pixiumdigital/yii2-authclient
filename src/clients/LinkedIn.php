@@ -99,21 +99,21 @@ class LinkedIn extends OAuth2
      */
     protected function initUserAttributes()
     {
-        //$attributes = $this->api('me?projection=(' . implode(',', $this->attributeNames) . ')', 'GET');
+        $attributes = $this->api('me?projection=(' . implode(',', $this->attributeNames) . ')', 'GET');
 
         $scopes = explode(' ', $this->scope);
-        /*if (in_array('r_emailaddress', $scopes, true)) {
+        if (in_array('r_emailaddress', $scopes, true)) {
             $emails = $this->api('emailAddress?q=members&projection=(elements*(handle~))', 'GET');
             if (isset($emails['elements'][0]['handle~']['emailAddress'])) {
                 $attributes['email'] = $emails['elements'][0]['handle~']['emailAddress'];
             }
-        }*/
-        $profile = $this->api('me?projection=(positions)', 'GET');
-        var_dump($profile);
-        die();
+        }
+        //$profile = $this->api('me?projection=(positions)', 'GET');
+        //var_dump($profile);
+        //die();
         if (in_array('profilePicture', $this->attributeNames, true)) {
             $profilePicture = $this->api('me?projection=(positions,profilePicture(displayImage~:playableStreams))', 'GET');
-            var_dump($profilePicture);
+            //var_dump($profilePicture);
             if (isset($profilePicture) && $profilePicture !== null) {
                 $attributes['profilePicture'] = $profilePicture;
             }
