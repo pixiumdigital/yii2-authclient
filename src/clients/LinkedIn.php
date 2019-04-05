@@ -107,6 +107,16 @@ class LinkedIn extends OAuth2
             if (isset($emails['elements'][0]['handle~']['emailAddress'])) {
                 $attributes['email'] = $emails['elements'][0]['handle~']['emailAddress'];
             }
+        }
+
+        $attrib = explode(' ', $this->attributeNames);
+        if (in_array('profile-picture', $attrib, true)) {
+            $profilePicture = $this->api('me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))', 'GET');
+            var_dump($profilePicture);
+            die();
+            //if (isset($emails['elements'][0]['handle~']['emailAddress'])) {
+            //    $attributes['email'] = $emails['elements'][0]['handle~']['emailAddress'];
+            //}
 
         }
 
