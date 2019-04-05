@@ -73,7 +73,7 @@ class LinkedIn extends OAuth2
         parent::init();
         if ($this->scope === null) {
             $this->scope = implode(' ', [
-                'r_liteprofile',
+                'r_basicprofile',
                 'r_emailaddress',
             ]);
         }
@@ -99,16 +99,16 @@ class LinkedIn extends OAuth2
      */
     protected function initUserAttributes()
     {
-        $attributes = $this->api('me?projection=(' . implode(',', $this->attributeNames) . ')', 'GET');
+        //$attributes = $this->api('me?projection=(' . implode(',', $this->attributeNames) . ')', 'GET');
 
         $scopes = explode(' ', $this->scope);
-        if (in_array('r_emailaddress', $scopes, true)) {
+        /*if (in_array('r_emailaddress', $scopes, true)) {
             $emails = $this->api('emailAddress?q=members&projection=(elements*(handle~))', 'GET');
             if (isset($emails['elements'][0]['handle~']['emailAddress'])) {
                 $attributes['email'] = $emails['elements'][0]['handle~']['emailAddress'];
             }
-        }
-        $profile = $this->api('me?projection=(position)', 'GET');
+        }*/
+        $profile = $this->api('me', 'GET');
         var_dump($profile);
         die();
         if (in_array('profilePicture', $this->attributeNames, true)) {
