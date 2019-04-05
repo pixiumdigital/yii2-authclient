@@ -110,7 +110,7 @@ class LinkedIn extends OAuth2
         }
 
         if (in_array('profilePicture', $this->attributeNames, true)) {
-            $profilePicture = $this->api('me?projection=(profilePicture(displayImage~:playableStreams))', 'GET');
+            $profilePicture = $this->api('me?projection=(positions,profilePicture(displayImage~:playableStreams))', 'GET');
             if (isset($profilePicture) && $profilePicture !== null) {
                 $attributes['profilePicture'] = $profilePicture;
             }
